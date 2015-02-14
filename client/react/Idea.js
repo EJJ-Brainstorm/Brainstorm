@@ -47,60 +47,37 @@ app.Idea = React.createClass({
     if (this.state.displaying && currentUser) {
         app.Ideas.pauseUpdates = false;
       // if there is a current user and their id is the same as the ideaOwner id, allow them to edit their own idea
+      // othersise if they arent a current user of were'nt the originator of an idea, dont let them edit/delete it. just like or comment it
+      var editableOption = (<span></span>);
       if (currentUser._id === ideaOwner) {
-        ideaContent = (
-          <div className="idea">
-
-            <form className="pure-form pure-g">
-              <div className="pure-u-1-1 pure-u-sm-2-3">
-                <h2 ref="body">{this.props.ownerName}: {this.props.name}</h2>
-                {editForm}
+        editableOption = (
+              <div className="auth-check">
+                <button className="" onClick={this.edit}>{ this.state.editing ? 'Cancel' : 'Edit Idea'}</button>
+                <button className="" onClick={this.delete}>Delete Idea</button>
+        <button className="" onClick={this.brainswarm}>Brainswarm</button>
               </div>
-
-              <div className="auth-check pure-u-1-1 pure-u-sm-1-3 watch">
-                <app.Interest idea_id={this.props._id} />
-              </div>
-              <div className="pure-u-1-1 auth-check">
-                <button className="button-small pure-button pure-button-primary" onClick={this.edit}>{ this.state.editing ? 'Cancel' : 'Edit Idea'}</button>
-                <button className="button-small pure-button pure-button-primary" onClick={this.delete}>Delete Idea</button>
-                <button className="button-small pure-button pure-button-primary" onClick={this.brainswarm}>Brainswarm</button>
-              </div>
-
-              <div className="pure-u-1-1 auth-check comments">
-                <app.Comments idea_id={this.props._id} />
-              </div>
-
-            </form>
-
+          )
+      }      
+    ideaContent = (
+      <div className="idea">
+        <form className="">
+          <div className="">
+            <h2 ref="body">{this.props.ownerName}: {this.props.name}</h2>
+            {editForm}
           </div>
-        );
-      }
-      //othersise if they arent a current user of were'nt the originator of an idea, dont let them edit/delete it. just like or comment it
-      else {
-        ideaContent = (
-          <div className="idea">
-
-            <form className="pure-form pure-g">
-              <div className="pure-u-1-1 pure-u-sm-2-3">
-                <h2 ref="body">{this.props.ownerName}: {this.props.name}</h2>
-                {editForm}
-              </div>
-
-              <div className="auth-check pure-u-1-1 pure-u-sm-1-3 watch">
-                <app.Interest idea_id={this.props._id} />
-              </div>
-              <div className="pure-u-1-1 auth-check comments">
-                <app.Comments idea_id={this.props._id} />
-              </div>
-            </form>
-
+          <div className="auth-check watch">
+            <app.Interest idea_id={this.props._id} />
           </div>
-        );
-      }
-    }
+          {editableOption}
+          <div className="auth-check comments">
+            <app.Comments idea_id={this.props._id} />
+          </div>
+        </form>
+      </div>
+    )}
 
     return (
-      <div>
+      <div className="stickyNote">
         {ideaContent}
       </div>
     );
