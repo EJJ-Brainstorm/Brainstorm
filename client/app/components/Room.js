@@ -27,13 +27,17 @@ var Room = React.createClass({
     // add a change listener on the IdeaStore
     // this is needed when the edit comes back and emits a change
     // that will force the component to re-render
-    IdeaStore.addChangeListener(function() {
-      if(this.isMounted()) {
-        this.setState({editing: false});
-      }
-    }.bind(this));
+    IdeaStore.addChangeListener(this._onChange);
+  },
 
+  _onChange: function(){
+    if(this.isMounted()) {
+      this.setState({editing: false});
+    }
+  },
 
+  componentWillUnmount: function() {
+    IdeaStore.removeChangeListener(this._onChange);
   },
 
   show: function () {

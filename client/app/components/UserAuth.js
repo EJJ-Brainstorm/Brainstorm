@@ -23,12 +23,18 @@ var UserAuth = React.createClass({
   },
 
   componentDidMount: function() {
-    UserStore.addChangeListener(function() {
-      if(this.isMounted()) {
-        this.setState({ currentUser: UserStore.get() });
-      }
-    }.bind(this));
+    UserStore.addChangeListener(this.onStoreChange);
     UserStore.getCurrentUser();
+  },
+
+  onStoreChange: function(){
+    if(this.isMounted()) {
+      this.setState({ currentUser: UserStore.get() });
+    }
+  },
+
+  componentWillUnmount: function() {
+    UserStore.removeChangeListener(this.onStoreChange);
   }
 
 });

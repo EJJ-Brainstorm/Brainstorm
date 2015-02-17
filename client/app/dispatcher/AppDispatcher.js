@@ -1,12 +1,18 @@
 //require app
 //require Flux.Dispatcher
 
-var AppDispatcher = _.extend(new Flux.Dispatcher(), {
+var Dispatcher = require('flux').Dispatcher;
+var assign = require('object-assign');
+// takes objects as arguements and assigns them to one large object
+// similar to underscore _extend
+
+var AppDispatcher = assign(new Dispatcher, {
   handleViewAction: function(action) {
-    this.dispatch({
+    var payload = {
       source: 'VIEW_ACTION',
       action: action
-    });
+    };
+    this.dispatch(payload);
   }
 });
 

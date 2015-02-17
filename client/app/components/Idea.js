@@ -7,6 +7,7 @@ var UserStore = require("../stores/UserStore");
 var IdeaActions = require("../actions/IdeaActions");
 var BrainswarmStore = require("../stores/BrainswarmStore");
 var BrainswarmActions = require("../actions/BrainswarmActions");
+var Q = require('q');
 
 var Idea = React.createClass({
   getInitialState: function() {
@@ -111,15 +112,38 @@ var Idea = React.createClass({
 
     var brainswarmName = this.props.name + "_brainswarm";
     var name = this.props.name;
-    var brainswarm = BrainswarmStore.findBrainswarm(this.props._id);
-    if (brainswarm){
-      // get a specific brainstorm
-      // REFACTOR TO USE AN ACTION
-      console.log("going to previous brainswarm");
-      BrainswarmStore.visitBrainswarm(brainswarm._id);
-    } else {
-      BrainswarmActions.create(this.props._id, brainswarmName);
-    }
+    // var brainswarm = BrainswarmStore.checkBrainswarm(this.props._id);
+    // if (!brainswarm){
+    //   var brainswarm = BrainswarmStore.getBrainswarm(this.props._id);
+    // }
+    // if (brainswarm){
+    //   // get a specific brainstorm
+    //   // REFACTOR TO USE AN ACTION
+    //   console.log("going to previous brainswarm");
+    //   BrainswarmStore.visitBrainswarm(brainswarm._id);
+    // } else {
+    //   BrainswarmActions.create(this.props._id, brainswarmName);
+    // }
+    var that = this;
+    BrainswarmStore.checkBrainswarm(this.props._id, function(brainswarm){
+      if (brainswarm){
+        BrainswarmStore.visitBrainswarm(brainswarm._id);
+      } else {
+        BrainswarmStore.getBrainswarm(that.props._id, function(brainswarmData){
+          if (brainswarmData) {
+            BrainswarmStore.visitBrainswarm(brainswarmData._id);
+          } else {
+            BrainswarmActions.create(that.props._id, brainswarmName);
+          }
+        });
+      }
+    });
+
+
+
+
+
+
     // CREATE THE BRAINSWARM
     // 1. make a brainswarm action
     // 2. within the brainswarm store

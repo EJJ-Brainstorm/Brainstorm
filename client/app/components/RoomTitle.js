@@ -1,5 +1,6 @@
 var React = require("react");
 var RoomStore = require("../stores/RoomStore");
+var _ = require("underscore");
 
 var RoomTitle = React.createClass({
   getInitialState: function() {
@@ -12,16 +13,22 @@ var RoomTitle = React.createClass({
   },
 
   componentDidMount: function() {
-    RoomStore.addChangeListener(function() {
-      if(this.isMounted()) {
-        this.setState({ room:
-          _(RoomStore.getAll()).filter(function (room) {
-            return room._id === this.props.room_id;
-          },this)[0]
-        });
-      }
-    }.bind(this));
+    RoomStore.addChangeListener(this.onStoreChange);
     RoomStore.all();
+  },
+
+  onStoreChange: function(){
+    if(this.isMounted()) {
+      this.setState({ room:
+        _(RoomStore.getAll()).filter(function (room) {
+          return room._id === this.props.room_id;
+        },this)[0]
+      });
+    }
+  },
+
+  componentWillUnmount: function() {
+    RoomStore.removeChangeListener(this.onStoreChange);
   },
 
   render: function() {

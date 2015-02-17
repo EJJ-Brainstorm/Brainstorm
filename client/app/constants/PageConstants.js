@@ -1,8 +1,10 @@
-var PageConstants = {
-  NAVIGATE: 'PAGE_NAVIGATE',
-  GETROOMDATA: 'PAGE_GETROOMDATA',
-  GETBRAINSWARMDATA: 'PAGE_GETBRAINSWARMDATA'
-};
+var keyMirror = require('keymirror');
+
+var PageConstants = keyMirror({
+  NAVIGATE: null,
+  GETROOMDATA: null,
+  GETBRAINSWARMDATA: null
+});
 
 module.exports = PageConstants;
 

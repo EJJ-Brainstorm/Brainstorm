@@ -1,7 +1,9 @@
-var InterestConstants = {
-  INTEREST_GET: 'INTEREST_GET',
-  INTEREST_CREATE: 'INTEREST_CREATE',
-  INTEREST_DELETE: 'INTEREST_DELETE'
-};
+var keyMirror = require('keymirror');
+
+var InterestConstants = keyMirror({
+  INTEREST_GET: null,
+  INTEREST_CREATE: null,
+  INTEREST_DELETE: null
+});
 
 module.exports = InterestConstants;

@@ -6,7 +6,7 @@ module.exports = {
   newBrainswarm: function(req, res, next) {
 
     var brainswarm = {};
-
+    console.log("not suppose to be HERE")
     //console.log('this is req: ',req);
     brainswarm.name = req.body.name;
     // need to send idea in ajax request within brainswarm store
@@ -42,13 +42,16 @@ module.exports = {
 
       // create promise for Idea.findById
       var findBrainswarmById = Q.nbind(Brainswarm.findById, Brainswarm);
-
+      console.log("HERE");
       // attempt to find the idea by the id passed in
       findBrainswarmById(req.params.brainswarm_id)
         .then(function(foundBrain) {
           // if the brainswarm is found update the name and save
           if (foundBrain) {
+            console.log("HEREEEEEE")
             foundBrain.map = req.body.map;
+            console.log("map", req.body.map);
+            console.log("req.body", req.body);
             //add more to update dont know what
             foundBrain.save(function(err) {
               if (err) {
@@ -61,6 +64,22 @@ module.exports = {
         .fail(function(error) {
           next(error);
         });
+    },
+
+    getBrainswarm: function(req, res, next){
+      var getBrainswarm = Q.nbind(Brainswarm.find, Brainswarm);
+      var query = req.params.idea_id ? { idea: req.params.idea_id } : {};
+      console.log("Look at this QUERY", query)
+      getBrainswarm(query)
+        .then(function(allBrainswarms) {
+        // if there are brainswarm send them in response
+        if(allBrainswarms) {
+          res.json(allBrainswarms);
+        }
+      })
+      .fail(function(error) {
+        next(error);
+      });
     }
 
 };

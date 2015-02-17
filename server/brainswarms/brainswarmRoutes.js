@@ -23,6 +23,7 @@ module.exports = function (app) {
 
   app.route('/:idea_id')
     .post(brainswarmController.newBrainswarm)
+    .get(brainswarmController.getBrainswarm);
 
   app.route('/:brainswarm_id')
     .put(brainswarmController.updateBrainswarm)

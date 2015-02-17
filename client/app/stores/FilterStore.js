@@ -1,9 +1,11 @@
 var AppDispatcher = require("../dispatcher/AppDispatcher");
+var EventEmitter = require('events').EventEmitter;
 var FilterConstants = require("../constants/FilterConstants");
+var assign = require("object-assign");
 
 var CHANGE_EVENT = 'change';
 
-var FilterStore = _.extend({}, EventEmitter.prototype, {
+var FilterStore = assign({}, EventEmitter.prototype, {
 
   _filtered:[],
 
@@ -50,11 +52,13 @@ AppDispatcher.register(function (payload) {
       // if (name !== '') {
       //   app.CommentStore.create(action.room_id, name);
       // }
+      FilterStore.emitChange();
       break;
 
     case FilerConstants.UNFILTER_NAME:
 
       FilterStore.filter(action.)
+      FilterStore.emitChange();
       break;
 
     default:

@@ -10,3 +10,4 @@ npm-debug.log
 server/config/config.js
 .idea
 client/app/bundle.js
+client/app/.bundle.js

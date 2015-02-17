@@ -12,15 +12,21 @@ var Ideas = React.createClass({
   pauseUpdates: false,
 
   componentDidMount: function () {
+    IdeaStore.addChangeListener(this.onStoreChange);
+  },
+
+  onStoreChange: function(){
     var that = this;
-    IdeaStore.addChangeListener(function() {
-      if(this.isMounted()) {
-        if(!that.pauseUpdates){
-          this.setState({ ideas: IdeaStore.getAll() });
-        }
+    if(this.isMounted()) {
+      if(!that.pauseUpdates){
+        this.setState({ ideas: IdeaStore.getAll() });
       }
-    }.bind(this));
+    }
     // get all ideas from db
+  },
+
+  componentWillUnmount: function(){
+    IdeaStore.removeChangeListener(this.onStoreChange);
   },
 
   render: function() {

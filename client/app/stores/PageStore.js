@@ -1,9 +1,12 @@
 var AppDispatcher = require("../dispatcher/AppDispatcher");
+var EventEmitter = require('events').EventEmitter;
 var PageConstants = require("../constants/PageConstants");
+var assign = require("object-assign");
+var page = require("page");
 
 var CHANGE_EVENT = 'change';
 
-var PageStore = _.extend({}, EventEmitter.prototype, {
+var PageStore = assign({}, EventEmitter.prototype, {
 
   //define routes for PageStore
   routes: {
@@ -67,6 +70,7 @@ AppDispatcher.register(function (payload) {
 
       //route application
       page(PageStore.routes[body.dest](body.props));
+      // PageStore.emitChange();
       break;
 
     default:

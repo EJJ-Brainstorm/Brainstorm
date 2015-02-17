@@ -1,6 +1,7 @@
 var React = require("react");
 var BrainswarmActions = require("../actions/BrainswarmActions");
 var BrainswarmStore = require("../stores/BrainswarmStore");
+var d3 = require("d3");
 
 function createMap(brainswarmId, brainswarm){
 
@@ -646,11 +647,11 @@ var Brainswarm = React.createClass({
 
   getInitialState: function(){
     // var currentBrainswarm = app.BrainswarmActions.getBrainswarm(this.props._id);
-    var currentBrainswarm = BrainswarmStore.getBrainswarm(this.props._id);
+    var currentBrainswarm = BrainswarmStore.findBrainswarm(this.props._id);
     console.log('this is brainswarm: ', currentBrainswarm);
 
     return {
-      currentBrainswarm: BrainswarmStore.getBrainswarm(this.props._id)
+      currentBrainswarm: BrainswarmStore.findBrainswarm(this.props._id)
     }
 
   },

@@ -1,8 +1,10 @@
-var CommentConstants = {
-  COMMENT_GET: 'COMMENT_GET',
-  COMMENT_CREATE: 'COMMENT_CREATE',
-  COMMENT_EDIT: 'COMMENT_EDIT',
-  COMMENT_DELETE: 'COMMENT_DELETE'
-};
+var keyMirror = require('keymirror');
+
+var CommentConstants = keyMirror({
+  COMMENT_GET: null,
+  COMMENT_CREATE: null,
+  COMMENT_EDIT: null,
+  COMMENT_DELETE: null
+});
 
 module.exports = CommentConstants;

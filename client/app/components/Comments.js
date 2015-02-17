@@ -14,11 +14,17 @@ var Comments = React.createClass({
 
   //when we mount the view setup event listener for store changes
   componentDidMount: function () {
-    CommentStore.addChangeListener(function () {
-      if (this.isMounted()) {
-        this.setState({ comments: CommentStore.getAll(this.props.idea_id) });
-      }
-    }.bind(this));
+    CommentStore.addChangeListener(this.onStoreChange);
+  },
+
+  onStoreChange: function(){
+    if (this.isMounted()) {
+      this.setState({ comments: CommentStore.getAll(this.props.idea_id) });
+    }
+  },
+
+  componentWillUnmount: function(){
+    CommentStore.removeChangeListener(this.onStoreChange);
   },
 
   show: function (e) {

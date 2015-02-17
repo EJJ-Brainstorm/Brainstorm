@@ -1,6 +1,9 @@
 var CHANGE_EVENT = 'change';
+var EventEmitter = require('events').EventEmitter;
+var assign = require("object-assign");
+var $ = require("jquery");
 
-var UserStore = _.extend({}, EventEmitter.prototype, {
+var UserStore = assign({}, EventEmitter.prototype, {
   _user: null,
 
   get: function() {

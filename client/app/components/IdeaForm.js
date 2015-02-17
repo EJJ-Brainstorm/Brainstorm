@@ -1,5 +1,6 @@
 var React = require("react");
 var IdeaActions = require("../actions/IdeaActions");
+// var $ = require("jquery");
 
 var IdeaForm = React.createClass({
   handleSubmit: function(e) {
@@ -55,7 +56,7 @@ var IdeaForm = React.createClass({
           <span> 5 min Timer:</span>
           <button id="startTimer" className="no-margin">start</button>
           <div id="pieTimer1" style={{display:"inline"}}></div>
-        </div>        
+        </div>
       </form>
     );
   }

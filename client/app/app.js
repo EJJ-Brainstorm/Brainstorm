@@ -1,2 +1,2 @@
-var app = {};
-var CHANGE_EVENT = 'change';
+// var app = {};
+// var CHANGE_EVENT = 'change';

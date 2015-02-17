@@ -1,11 +1,14 @@
-var socket = io.connect();
+// var socket = io.connect();
 var AppDispatcher = require("../dispatcher/AppDispatcher");
+var EventEmitter = require('events').EventEmitter;
 var RoomConstants = require("../constants/RoomConstants");
 var PageActions = require("../actions/PageActions");
+var assign = require("object-assign");
+var $ = require("jquery");
 
 var CHANGE_EVENT = 'change';
 
-var RoomStore = _.extend({}, EventEmitter.prototype, {
+var RoomStore = assign({}, EventEmitter.prototype, {
   _rooms: [],
 
   getAll: function() {
@@ -26,10 +29,10 @@ var RoomStore = _.extend({}, EventEmitter.prototype, {
       console.log(error);
     });
 
-    socket.on('room-change', function(currentRooms) {
-      this._rooms = currentRooms;
-      this.emitChange();
-    }.bind(this));
+    // socket.on('room-change', function(currentRooms) {
+    //   this._rooms = currentRooms;
+    //   // this.emitChange();
+    // }.bind(this));
   },
 
   create: function(name) {
@@ -43,7 +46,7 @@ var RoomStore = _.extend({}, EventEmitter.prototype, {
       this._rooms.push(room);
 
       // broadcast that _rooms has changed
-      socket.emit('room-change', this._rooms);
+      // socket.emit('room-change', this._rooms);
       this.emitChange();
 
       PageActions.navigate({
@@ -70,10 +73,11 @@ var RoomStore = _.extend({}, EventEmitter.prototype, {
         if(room._id === roomEdit._id) {
           room.name = roomEdit.name;
           // broadcast that _rooms has changed
-          socket.emit('room-change', this._rooms);
-          return this.emitChange();
+          // socket.emit('room-change', this._rooms);
+          // return this.emitChange();
         }
       }.bind(this));
+      this.emitChange();
     }.bind(this))
     .fail(function(error) {
       console.error(error);
@@ -93,10 +97,11 @@ var RoomStore = _.extend({}, EventEmitter.prototype, {
           this._rooms.splice(index, 1);
 
           // broadcast that _rooms has changed
-          socket.emit('room-change', this._rooms);
-          return this.emitChange();
+          // socket.emit('room-change', this._rooms);
+          // return this.emitChange();
         }
       }.bind(this));
+      this.emitChange();
     }.bind(this))
     .fail(function(error) {
       console.error(error);

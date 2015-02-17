@@ -1,12 +1,15 @@
-var socket = io.connect();
+// var socket = io.connect();
 var AppDispatcher = require("../dispatcher/AppDispatcher");
+var EventEmitter = require('events').EventEmitter;
 var IdeaConstants = require("../constants/IdeaConstants");
 var PageConstants = require("../constants/PageConstants");
 var PageStore = require("./PageStore");
+var assign = require("object-assign");
+var $ = require("jquery");
 
 var CHANGE_EVENT = 'change';
 
-var IdeaStore = _.extend({}, EventEmitter.prototype, {
+var IdeaStore = assign({}, EventEmitter.prototype, {
   _ideas: [],
 
   _room: function() {
@@ -32,10 +35,10 @@ var IdeaStore = _.extend({}, EventEmitter.prototype, {
       console.error(error);
     });
 
-    socket.on('idea-change', function(currentIdeas) {
-      this._ideas = currentIdeas;
-      this.emitChange();
-    }.bind(this));
+    // socket.on('idea-change', function(currentIdeas) {
+    //   this._ideas = currentIdeas;
+    //   // this.emitChange();
+    // }.bind(this));
   },
 
   all: function () {
@@ -52,10 +55,10 @@ var IdeaStore = _.extend({}, EventEmitter.prototype, {
       console.error(error);
     });
 
-    socket.on('idea-change', function(currentIdeas) {
-      this._ideas = currentIdeas;
-      this.emitChange();
-    }.bind(this));
+    // socket.on('idea-change', function(currentIdeas) {
+    //   this._ideas = currentIdeas;
+    //   // this.emitChange();
+    // }.bind(this));
   },
 
   create: function (room_id, name) {
@@ -68,7 +71,7 @@ var IdeaStore = _.extend({}, EventEmitter.prototype, {
       this._ideas.push(idea);
 
       // broadcast that _ideas has changed
-      socket.emit('idea-change', this._ideas, this._room());
+      // socket.emit('idea-change', this._ideas, this._room());
       this.emitChange();
     }.bind(this))
     .fail(function(error) {
@@ -90,10 +93,11 @@ var IdeaStore = _.extend({}, EventEmitter.prototype, {
           idea.name = ideaEdit.name;
 
           // broadcast that _ideas has changed
-          socket.emit('idea-change', this._ideas, this._room());
-          return this.emitChange();
+          // socket.emit('idea-change', this._ideas, this._room());
+          // return this.emitChange();
         }
       }.bind(this));
+      this.emitChange();
     }.bind(this))
     .fail(function(error) {
       console.error(error);
@@ -114,10 +118,11 @@ var IdeaStore = _.extend({}, EventEmitter.prototype, {
           this._ideas.splice(index, 1);
 
           // broadcast that _ideas has changed
-          socket.emit('idea-change', this._ideas, this._room());
-          return this.emitChange();
+          // socket.emit('idea-change', this._ideas, this._room());
+          // return this.emitChange();
         }
       }.bind(this));
+      this.emitChange();
     }.bind(this))
     .fail(function(error) {
       console.error(error);

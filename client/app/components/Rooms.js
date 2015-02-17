@@ -10,12 +10,18 @@ var Rooms = React.createClass({
   },
 
   componentDidMount: function() {
-    RoomStore.addChangeListener(function() {
-      if(this.isMounted()) {
-        this.setState({ rooms: RoomStore.getAll() });
-      }
-    }.bind(this));
+    RoomStore.addChangeListener(this._onChange);
     RoomStore.all();
+  },
+
+  _onChange: function(){
+    if(this.isMounted()) {
+      this.setState({ rooms: RoomStore.getAll() });
+    }
+  },
+
+  componentWillUnmount: function(){
+    RoomStore.removeChangeListener(this._onChange);
   },
 
   render: function() {

@@ -10,7 +10,7 @@ var PageNav = require("./PageNav");
 var UserStore = require("../stores/UserStore");
 var PageStore = require("../stores/PageStore");
 var PageActions = require("../actions/PageActions");
-var socket = io.connect();
+// var socket = io.connect();
 
 var BrainstormApp = React.createClass({
   getInitialState: function() {
@@ -50,9 +50,9 @@ var BrainstormApp = React.createClass({
       }
       this.setState(state);
 
-      if(!state.indexView) {
-        socket.emit('join', state.props);
-      }
+      // if(!state.indexView) {
+      //   socket.emit('join', state.props);
+      // }
     }.bind(this));
   },
 

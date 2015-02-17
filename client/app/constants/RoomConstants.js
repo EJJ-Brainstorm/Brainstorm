@@ -1,7 +1,9 @@
-var RoomConstants = {
-  ROOM_CREATE: 'ROOM_CREATE',
-  ROOM_EDIT: 'ROOM_EDIT',
-  ROOM_DELETE: 'ROOM_DELETE'
-};
+var keyMirror = require('keymirror');
+
+var RoomConstants = keyMirror({
+  ROOM_CREATE: null,
+  ROOM_EDIT: null,
+  ROOM_DELETE: null
+});
 
 module.exports = RoomConstants;

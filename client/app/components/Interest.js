@@ -36,13 +36,19 @@ var Interest = React.createClass({
   },
 
   componentDidMount: function () {
-    InterestStore.addChangeListener(function () {
-      if(this.isMounted()) {
-        var interests = InterestStore.getAll(this.props.idea_id);
-        this.checkLiked(interests);
-        this.setState({ interests: interests });
-      }
-    }.bind(this));
+    InterestStore.addChangeListener(this.onStoreChange);
+  },
+
+  onStoreChange: function(){
+    if(this.isMounted()) {
+      var interests = InterestStore.getAll(this.props.idea_id);
+      this.checkLiked(interests);
+      this.setState({ interests: interests });
+    }
+  },
+
+  componentWillUnmount: function() {
+    InterestStore.removeChangeListener(this.onStoreChange);
   },
 
   render: function () {

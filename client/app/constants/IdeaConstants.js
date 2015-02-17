@@ -1,7 +1,9 @@
-var IdeaConstants = {
-  IDEA_CREATE: 'IDEA_CREATE',
-  IDEA_EDIT: 'IDEA_EDIT',
-  IDEA_DELETE: 'IDEA_DELETE'
-};
+var keyMirror = require('keymirror');
+
+var IdeaConstants = keyMirror({
+  IDEA_CREATE: null,
+  IDEA_EDIT: null,
+  IDEA_DELETE: null
+});
 
 module.exports = IdeaConstants;
