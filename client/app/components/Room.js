@@ -13,7 +13,7 @@ function ideaWordCloud(selector, ideaWords){
     var selector = selector.split(" ")[0]
 
     var svg = d3.select(selector).append("svg")
-                .attr("width", 100)
+                .attr("width", 150)
                 .attr("height", 100)
                 .append("g")
                 .attr("transform", "translate(50,50)");
@@ -54,7 +54,7 @@ function ideaWordCloud(selector, ideaWords){
         //Recompute the word cloud for a new set of words. This method will
         // asycnhronously call draw when the layout has been computed.
         update: function(words) {
-            d3.layout.cloud().size([100, 100])
+            d3.layout.cloud().size([135, 100])
                 .words(words)
                 .padding(2)
                 .rotate(function() { return ~~(Math.random() * 2) * 90; })
@@ -83,7 +83,7 @@ function ideaWordCloud(selector, ideaWords){
             .split(' ')
             .filter(unique)
             .map(function(d) {
-              return {text: d, size: 10 + Math.random() * 5};
+              return {text: d, size: 12 + Math.random() * 5};
             })
   }
 

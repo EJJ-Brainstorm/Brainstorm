@@ -10,6 +10,7 @@ var PageNav = require("./PageNav");
 var UserStore = require("../stores/UserStore");
 var PageStore = require("../stores/PageStore");
 var PageActions = require("../actions/PageActions");
+var About = require("./About");
 var socket = io.connect();
 
 var BrainstormApp = React.createClass({
@@ -17,6 +18,7 @@ var BrainstormApp = React.createClass({
     return {
       indexView: true,
       roomView: false,
+      aboutView: false,
       currentUser: UserStore.get(),
       filterText: '',
       filterNames: ''
@@ -40,6 +42,7 @@ var BrainstormApp = React.createClass({
       state.props = state.props || '';
       state.indexView = (state.dest === 'welcome' ? true : false);
       state.roomView = (state.dest === 'rooms' ? true : false);
+      state.aboutView = (state.dest === 'about' ? true : false);
       if (state.dest === 'rooms'){
         setTimeout(function () {
           PageActions.getRoomData(state.props);
@@ -51,9 +54,9 @@ var BrainstormApp = React.createClass({
       }
       this.setState(state);
 
-      if(!state.indexView && !state.roomView) {
+      if(!state.indexView && !state.roomView && !state.aboutView) {
         socket.emit('join-brainswarm', state.props);
-      } else if (!state.indexView) {
+      } else if (!state.indexView && !state.aboutView) {
         socket.emit('join', state.props);
       }
     }.bind(this));
@@ -93,6 +96,11 @@ var BrainstormApp = React.createClass({
             </div>
         </div>
       );
+    } else if (this.state.aboutView) {
+      currentView = (
+        <About />
+      );
+
     } else { // brainswarm
      currentView = (
       <div>

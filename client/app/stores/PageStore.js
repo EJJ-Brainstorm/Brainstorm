@@ -22,6 +22,10 @@ var PageStore = assign({}, EventEmitter.prototype, {
 
     brainswarms: function (brainswarmId) {
       return '/brainswarms/'+brainswarmId
+    },
+
+    about: function(){
+      return '/about';
     }
 
   },
@@ -29,6 +33,10 @@ var PageStore = assign({}, EventEmitter.prototype, {
   //dispatch event to render welcome
   welcome: function () {
     this.emitChange('welcome');
+  },
+
+  about: function () {
+    this.emitChange('about');
   },
 
   //dispatch event to render rooms
@@ -103,6 +111,10 @@ page('/rooms/:roomId', function(ctx){
 page('/brainswarms/:brainswarmId', function(ctx) {
  // console.log('this is ctx', ctx);
   PageStore.brainswarms(ctx.params.brainswarmId)
+});
+
+page('/about', function(){
+  PageStore.about();
 });
 
 module.exports = PageStore;
