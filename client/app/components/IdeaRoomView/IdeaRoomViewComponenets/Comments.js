@@ -17,7 +17,7 @@ var Comments = React.createClass({
 
   _url: false,
   //get all loaded comments
-  getInitialState: function () {
+  getInitialState: function() {
     var comments = CommentStore.getAll(this.props.idea_id);
     return {
       displaying: false,
@@ -34,7 +34,7 @@ var Comments = React.createClass({
   },
 
   //when we mount the view setup event listener for store changes
-  componentDidMount: function () {
+  componentDidMount: function() {
     this.listenTo(CommentStore, this.onStoreChange);
   },
 
@@ -54,7 +54,7 @@ var Comments = React.createClass({
   },
 
   //render a comment component for each comment
-  render: function () {
+  render: function() {
     var comments;
     var commentForm;
     var showCommentsButton;
@@ -65,14 +65,14 @@ var Comments = React.createClass({
       commentForm = <CommentForm idea_id={ideaId} />
       comments = [];
       //render a comment component for each comment
-      this.state.comments.forEach(function (comment) {
+      this.state.comments.forEach(function(comment) {
         comments.push(
           <Comment anchor={comment.urlBoolean} ownerName={comment.ownerName} name={comment.name} key={comment._id} _id={comment._id} />
         );
       });
     }
 
-    showCommentsButton = <button className="fa fa-comments-o" onClick={this.show}>{this.state.displaying? 'Hide' : ''}</button>
+    showCommentsButton = <button className="fa fa-comments-o" style={{paddingLeft: ".5rem"}} onClick={this.show}>{this.state.displaying? 'Hide' : ''}</button>
 
     return (
       <div ref="body" style={{display:"inline"}}>

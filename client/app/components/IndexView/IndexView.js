@@ -15,7 +15,7 @@ var IndexView = React.createClass({
     }
   },
 
-  componentDidMount: function(){
+  componentDidMount: function() {
     this.listenTo(UserStore, this.onStoreChange);
   },
 
@@ -26,7 +26,7 @@ var IndexView = React.createClass({
     }
  },
 
-  componentDidUpdate: function(){
+  componentDidUpdate: function() {
     if(this.state.currentUser){
       this.transitionTo('/rooms')
     }

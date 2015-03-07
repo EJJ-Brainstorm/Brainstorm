@@ -22,11 +22,11 @@ var BrainstormApp = React.createClass({
       }
   },
 
-  componentDidMount: function () {
+  componentDidMount: function() {
     this.listenTo(UserStore,this.onStoreChange);
   },
 
-  render: function(){
+  render: function() {
 
     return (
       <div>

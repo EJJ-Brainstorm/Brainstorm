@@ -27,26 +27,30 @@ a:hover {
 
 #hero{
   position: relative;
+  float: left;
+  text-align: center;
 }
 
 .hero-text{
   position: absolute;
-  top: 22%;
-  left: 25%;
-  font-size: 6rem;
+  top: 8.5rem;
+  left: 1rem;
+  right: 1rem;
+  font-size: 8rem;
   color: white;
   font-family: GillSans, Calibri, Trebuchet, sans-serif;
-  letter-spacing: 2px;
+  letter-spacing: .2rem;
   font-weight: 600;
 }
 
 .hero-tagline{
   position: absolute;
-  top: 37%;
-  left: 32%;
-  font-size: 4rem;
+  top: 18rem;
+  left: 1rem;
+  right: 1rem;
+  font-size: 6rem;
   font-family: GillSans, Calibri, Trebuchet, sans-serif;
-  letter-spacing: 1px;
+  letter-spacing: .1rem;
   font-weight: 300;
   color: white;
 
@@ -97,9 +101,6 @@ input.postfix {
   background-color: white;
   font-size: 1.25rem;
 }
-
-/*background-color: rgba(202, 202, 202, 0.37);
-  font-size: 12px;*/
 
 .pure-button.no-margin {
   margin-left:0 !important;
@@ -219,8 +220,6 @@ h2 {
 #legendSection{
     width: 24%;
     float: left;
-
-    /*padding: 1em;*/
     z-index: 5;
 }
 
@@ -236,8 +235,6 @@ h2 {
 }
 
 .toolbox{
-
-    /*width: 25%;*/
     margin-bottom: 0.5em;
     margin-left: 1em;
     border-color: transparent;
@@ -356,7 +353,7 @@ path.link.selected {
   background:#ffc;
   display:block;
   height:10em;
-  width:10em;
+  width:12em;
   padding:1em;
   /* Firefox */
   -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
@@ -421,7 +418,7 @@ path.link.selected {
   background:#ffc;
   display:block;
   height:auto;
-  width:10em;
+  width:12em;
   padding:1em;
   -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
   -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
@@ -485,7 +482,6 @@ path.link.selected {
 }
 
 .room-anchor{
-  /*cursor: url('assets/small.png'), url('http://www.homeroomteacher.com/Images/Products/Display/S_SBZ/SAN80001_L.jpg'), pointer;*/
   font-family: Comic Sans MS;
 }
 
@@ -549,4 +545,6 @@ path.link.selected {
 
 .legend-text{
   font-size: 1.25rem;
+  line-height: 130%;
+  margin: .75rem 0rem;
 }

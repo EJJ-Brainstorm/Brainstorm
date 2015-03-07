@@ -22,7 +22,7 @@ var CommentForm = React.createClass({
    name: React.PropTypes.string
   },
 
-  handleSubmit: function (e) {
+  handleSubmit: function(e) {
     e.preventDefault();
 
     var commentBody = this.refs.input.getDOMNode();
@@ -42,7 +42,7 @@ var CommentForm = React.createClass({
     return;
   },
 
-  render: function () {
+  render: function() {
     return (
       <form className="pure-form auth-check formComment" ref="body" onSubmit={this.handleSubmit}>
 

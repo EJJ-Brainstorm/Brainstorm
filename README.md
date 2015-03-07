@@ -4,6 +4,8 @@
 
 Brainstormer is built to make the process of brainstorming and idea sharing easier.
 
+Visit [http://brainstormideation.herokuapp.com](http://brainstormideation.herokuapp.com) to try it now!
+
 It leverages [React](https://github.com/facebook/react), [Flux](https://github.com/facebook/flux), and [Socket.io](https://github.com/Automattic/socket.io) to create a truly seamless user and collaborative experience.
 
 [Traditional brainstorming is broken.](https://hbr.org/2014/03/why-you-should-stop-brainstorming)
@@ -25,21 +27,12 @@ View the project roadmap/issues [here](https://waffle.io/ejj-brainstorm/brainsto
 
 Please review [CONTRIBUTING.md](CONTRIBUTING.md)
 
-###App Gulp Tasks
+## Requirements
 
-Serve index.js with nodemon (page will reload on server and client files changes)
-
-`gulp`
-
-Set up automatic jsx compiling on save:
-
-First install react tools if you have not already (may need to run as sudo)
-
-`npm install -g react-tools`
-
-then run from the root of the application run
-
-`npm start`
+- Node
+- MongoDB
+- Gulp
+- Bower
 
 ## Development
 
@@ -55,6 +48,7 @@ npm install
 bower install
 ```
 
+&nbsp;
 2. npm tasks
 
 ```sh
@@ -65,6 +59,7 @@ To browserify and start auto-compiling jsx while watching the jsx files and savi
 
 All the components will be bundled into a file called bundle.js that is then required within the index.html
 
+&nbsp;
 3. Gulp tasks
 
 ```sh
@@ -73,12 +68,14 @@ gulp
 
 To server assets and launch on localhost:3000
 
+&nbsp;
 4. Acquire correct github credentials by registering your app [here](https://github.com/settings/applications). Make sure to get your client_id and client_secret. For working in development set your homepage url as: `http://127.0.0.1:3000`. Set your authorization callback url as: `http://localhost:3000/auth/github/callback`
 
 Acquire correct facebook credentials by registering your app [here](https://developers.facebook.com/). Go to "My Apps" and add a new app.
 
 Acquire correct google credentials by registering your app [here](https://console.developers.google.com/project). Create a project, then go to "Credentials" under "APIs & auth" and create a new client Id.
 
+&nbsp;
 5. Create a config.js file in /server/config with the following contents:
 ```sh
 var config = {

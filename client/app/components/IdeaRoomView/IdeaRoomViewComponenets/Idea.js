@@ -32,28 +32,28 @@ var Idea = React.createClass({
   getInitialState : function () {
     // set initial editing state to false
     return {
-      displaying : true ,
-      editing : false ,
-      filtered : false ,
-      currentUser : UserStore.get(),
-      deleteIdea : false
+      displaying: true,
+      editing: false,
+      filtered: false,
+      currentUser: UserStore.get(),
+      deleteIdea: false
     };
   } ,
 
-  componentDidUpdate : function () {
+  componentDidUpdate: function() {
 
     if (this.state.deleteIdea) {
-      var mod = $ ('#modal1').openModal ();
+      var mod = $ ('#modal1').openModal();
     }
-  } ,
+  },
 
-  componentDidMount : function () {
+  componentDidMount: function() {
 
     var self = this;
     var ideaId = self.props._id;
     var selectz = '#' + ideaId;
 
-    var node = $ (selectz);
+    var node = $(selectz);
 
     //might need to look into offset to make correct location calculation
     //var offset =  node.offset()
@@ -63,7 +63,7 @@ var Idea = React.createClass({
     // node.css({position: "relative", left: this.props.position.left+"px", top: this.props.position.top+"px"});
     //node.css({"-webkit-transform":"translate("+ this.props.position.left+"px,"+ this.props.position.top+"px)"});
 
-    socket.on('edit location', function (data) {
+    socket.on('edit location', function(data) {
       var ideaId = self.props._id;
 
       if (data.id === ideaId) {
@@ -73,7 +73,7 @@ var Idea = React.createClass({
 
 
   },
-  componentWillUnmount : function() {
+  componentWillUnmount: function() {
     //saving coordinates when leaving room
     this.props.position = this.state.position;
     var idea = this.props;
@@ -81,17 +81,17 @@ var Idea = React.createClass({
     IdeaStore.edit (idea)
   },
 
-  show : function() {
+  show: function() {
     if (this.isMounted ()) {
       this.setState ({displaying : !this.state.displaying});
     }
   },
 
-  handleStart : function(event , ui) {
+  handleStart: function(event , ui) {
 
   },
 
-  handleDrag : function(event , ui) {
+  handleDrag: function(event , ui) {
     var obj = {};
 
     obj.ui = ui.position;
@@ -100,13 +100,13 @@ var Idea = React.createClass({
     socket.emit ('idea change' , obj);
   },
 
-  handleStop : function(event , ui) {
+  handleStop: function(event , ui) {
 
     this.setState ({position : {top : event.clientY , left : event.clientX}});
 
   },
 
-  render : function() {
+  render: function() {
     var ideaContent;
     var editForm;
     var currentUser = this.state.currentUser;
@@ -132,8 +132,8 @@ var Idea = React.createClass({
       if (currentUser._id === ideaOwner) {
         editableOption = (
           <div className="auth-check" style={{display : "inline"}}>
-            <button className="fa fa-trash-o" style={{paddingRight : "30px"}}  onClick={this.delete}></button>
-            <button className="fa fa-pencil-square-o" style={{paddingRight : "30px"}} onClick={this.edit}> { this.state.editing ? 'Cancel' : ''} </button>
+            <button className="fa fa-trash-o" style={{paddingRight : "2rem", paddingLeft: ".5rem"}}  onClick={this.delete}></button>
+            <button className="fa fa-pencil-square-o" style={{paddingRight : "2rem", paddingLeft: ".5rem"}} onClick={this.edit}> { this.state.editing ? 'Cancel' : ''} </button>
           </div>
         )
       }
@@ -152,7 +152,7 @@ var Idea = React.createClass({
 
               <form>
                 <div>
-                   <div className="ideaDescription" style={{fontSize:"1.5rem"}} ref="body">{this.props.name}</div>
+                   <div className="ideaDescription" style={{fontSize:"1.75rem"}} ref="body">{this.props.name}</div>
                 </div>
 
                 <div className="ideaFooter">
@@ -162,7 +162,7 @@ var Idea = React.createClass({
                     <Interest idea_id={this.props._id} />
                   </div>
 
-                  <button className="brainswarm-btn no-margin btn waves-effect waves-light" style={{display:"inline", backgroundColor: "rgba(198, 227, 250, 0.4)", color: "black", marginTop: "15px", padding: "0px 8px"}} onClick={this.brainswarm}>Brainswarm</button>
+                  <button className="brainswarm-btn no-margin btn waves-effect waves-light" style={{display:"inline", backgroundColor: "rgba(198, 227, 250, 0.4)", color: "black", marginTop: "1rem", padding: "0px 1rem", marginLeft: ".2rem"}} onClick={this.brainswarm}>Brainswarm</button>
                   <div>
                 {editForm}
                 {editableOption}
@@ -175,29 +175,27 @@ var Idea = React.createClass({
             </div>
           </Draggable>
         </div>
-
-
       )
     }
 
     return (ideaContent);
   },
 
-  edit : function (e) {
+  edit: function(e) {
     e.preventDefault ();
     if (this.isMounted ()) {
       this.setState ({editing : !this.state.editing});
     }
   },
 
-  delete : function (e) {
+  delete: function(e) {
     e.preventDefault ();
     if (this.isMounted ()) {
       this.setState ({deleteIdea : !this.state.deleteIdea});
     }
   },
 
-  brainswarm : function (e) {
+  brainswarm: function(e) {
     e.preventDefault ();
 
     var name = this.props.name;

@@ -7,7 +7,7 @@ var NotFoundView = React.createClass({
 
   mixins: [Navigation, PureRenderMixin],
 
-  componentDidMount: function(){
+  componentDidMount: function() {
     var currentUrl = window.location.href;
     if (currentUrl.substr(currentUrl.length - 3) === "_=_"){
        this.transitionTo('/rooms');

@@ -23,7 +23,7 @@ var Rooms = React.createClass({
     IdeaActions.all();
   },
 
-  onStoreChange: function(){
+  onStoreChange: function() {
     if(this.isMounted()) {
       this.setState({ rooms: RoomStore.getAll() });
     }

@@ -35,7 +35,7 @@ var RoomCreateForm = React.createClass({
     return;
   },
 
-  render: function(){
+  render: function() {
     return (
       <form className="auth-check pure-form pure-g" ref="form" onSubmit={this.handleSubmit}>
         <input className="pure-u-1-1 pure-u-sm-5-6 postfix" type="text" ref="name" defaultValue={this.props.name} placeholder="Create a Room" />

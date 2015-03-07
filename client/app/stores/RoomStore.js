@@ -17,7 +17,7 @@ var RoomStore = Reflux.createStore({
     return this._rooms;
   },
 
-  socketListener: function(){
+  socketListener: function() {
     socket.on('room-change', function(currentRooms) {
       this._rooms = currentRooms;
       this.trigger();

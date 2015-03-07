@@ -24,14 +24,14 @@ var IdeaStore = Reflux.createStore({
     return this._ideas;
   },
 
-  socketListener: function(){
+  socketListener: function() {
     socket.on('idea-change', function(currentIdeas) {
       this._ideas = currentIdeas;
       this.trigger();
     }.bind(this));
   },
 
-  get: function (room_id) {
+  get: function(room_id) {
     $.ajax({
       type: 'GET',
       url: '/ideas/' + room_id
@@ -46,7 +46,7 @@ var IdeaStore = Reflux.createStore({
     });
   },
 
-  all: function () {
+  all: function() {
     $.ajax({
       type: 'GET',
       url: '/ideas'
@@ -61,7 +61,7 @@ var IdeaStore = Reflux.createStore({
     });
   },
 
-  create: function (room_id, name) {
+  create: function(room_id, name) {
     $.ajax({
       type: 'POST',
       url: '/ideas/' + room_id,

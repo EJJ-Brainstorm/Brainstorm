@@ -19,7 +19,6 @@ function createMap(brainswarmId, brainswarm){
       var thisGraph = this;
       thisGraph.idct = 0;
 
-      //mapData = window.JSON.stringify({"nodes": thisGraph.nodes, "edges": saveEdges});
       thisGraph.nodes = nodes || [];
       thisGraph.edges = edges || [];
 
@@ -159,6 +158,7 @@ function createMap(brainswarmId, brainswarm){
       }
 
       socket.on('edit map', function(map){
+        mapData = map;
         thisGraph.deleteGraph(true);
         thisGraph.nodes = JSON.parse(map).nodes;
         thisGraph.setIdCt(thisGraph.nodes.length + 1);
@@ -198,7 +198,6 @@ function createMap(brainswarmId, brainswarm){
     GraphCreator.prototype.saveDB = function(){
       var thisGraph= this;
       var saveEdges = [];
-      //  console.log(thisGraph);
 
       thisGraph.edges.forEach(function(val, i){
         saveEdges.push({source: val.source.id, target: val.target.id});
@@ -614,7 +613,6 @@ function createMap(brainswarmId, brainswarm){
     GraphCreator.prototype.emit = function(noSave){
       var thisGraph = this;
       var saveEdges = [];
-      console.log("THIS IS BOOL",noSave);
       thisGraph.edges.forEach(function(val, i){
         saveEdges.push({source: val.source.id, target: val.target.id});
       });
@@ -627,16 +625,13 @@ function createMap(brainswarmId, brainswarm){
         }
       }
       var data = window.JSON.stringify({"nodes": thisGraph.nodes, "edges": saveEdges});
-      //  console.log("CLIENTMAP",mapId)
+
       mapData = data;
       var end = {};
       end.mapData = mapData;
       if(!noSave){
         end.toSave = true;
-        console.log("THIS IS FINAL",end)
       }
-      // var idz = mapId.toString();
-      // console.log('NUMZ', typeof idz)
       socket.emit('map change', end);
     };
     // MAIN
@@ -690,17 +685,13 @@ var Brainswarm = React.createClass({
       currentBrainswarm = backupBrainswarm;
       createMap(brainswarmId, backupBrainswarm);
     });
-    // create a set interval function so that if user happens to refresh the page
-    // then the map is most likely saved
-    var self = this;
-    // window.setInterval(function(){
-    //   BrainswarmActions.edit(self.state.brainswarmId, mapData);
-    // }, 3000)
+
     return {
       currentBrainswarm: currentBrainswarm,
       brainswarmId: brainswarmId
     }
   },
+
   propTypes: {
     currentBrainswarm: React.PropTypes.shape({
       id: React.PropTypes.string,
@@ -709,7 +700,6 @@ var Brainswarm = React.createClass({
       owner: React.PropTypes.string,
       ownerName: React.PropTypes.string
     })
-
   },
 
   render: function(){
@@ -728,7 +718,6 @@ var Brainswarm = React.createClass({
               <p className="center-align legend-text"> click on circle or arrow and press backspace/delete to delete</p>
             </div>
             <div className="toolbox">
-
               <a id="download-input" className="waves-effect waves-light btn-large cyan">
                 <i  className="mdi-file-file-download"></i>
               </a>
@@ -737,33 +726,23 @@ var Brainswarm = React.createClass({
 
           <div id="graph" className="blue lighten-2 col s9 offset-s3">
           </div>
-
         </section>
-
-
       </div>
     );
   },
 
-  componentDidMount: function(){
-    console.log("component Mounted");
+  componentDidMount: function() {
     socket.emit('join brainswarm', this.state.brainswarmId);
     createMap(this.state.brainswarmId, this.state.currentBrainswarm);
-    //window.onbeforeunload = function(e) {
-    //  e.preventDefault();
-    //  BrainswarmActions.edit(this.state.brainswarmId, mapData);
-    //};
   },
 
-  componentWillUnmount: function(){
+  componentWillUnmount: function() {
     // similar to componentDidMount but also invoked on the server;
-    console.log("THIS IS DATA",this.state.brainswarmId)
-    console.log("MAPDAYA", mapData)
     BrainswarmActions.edit(this.state.brainswarmId, mapData);
     socket.emit('brainswarm leave', this.state.brainswarmId);
   },
 
-  componentDidUpdate: function(){
+  componentDidUpdate: function() {
     // after new state has been set
     createMap(this.state.brainswarmId, this.state.currentBrainswarm);
   }

@@ -34,7 +34,7 @@ var IdeaForm = React.createClass({
   },
 
   //add pie timer
-  componentDidMount: function(){
+  componentDidMount: function() {
 
     $('#pieTimer1').pietimer({
       seconds: 300,
@@ -54,7 +54,7 @@ var IdeaForm = React.createClass({
     })
   },
 
-  render: function(){
+  render: function() {
     // if editing the defaultValue will be the idea name
     // if editing an "Edit" button will show otherwise a "Create"
     return (
@@ -62,7 +62,7 @@ var IdeaForm = React.createClass({
         <input className="postfix" style={{fontSize: "25px"}} type="text" ref="name" defaultValue={this.props.name} placeholder="Add an Idea" />
         <button className="no-margin btn waves-effect waves-light" type="submit" ref="submit" >{this.props.editing ? "Edit Idea" : "Create"}</button>
         <div className="timer" style={{display:"inline"}}>
-          <span>{this.props.editing ? "" : "   5 min Timer:"} </span>
+          <span style={{paddingLeft: ".5rem"}}>{this.props.editing ? "" : "5 min Timer:"} </span>
           <button id="startTimer" className="no-margin">{this.props.editing ? "" : "start"}</button>
           <div id="pieTimer1" style={{display:"inline"}}></div>
         </div>

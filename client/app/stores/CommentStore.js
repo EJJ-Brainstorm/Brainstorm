@@ -19,14 +19,14 @@ var CommentStore = Reflux.createStore({
     this._room = currentRoom;
   },
 
-  getAll: function (idea_id) {
+  getAll: function(idea_id) {
     if (!idea_id) return this._comments;
     return _(this._comments).filter(function (comment) {
       return comment.idea === idea_id;
     });
   },
 
-  socketListener: function(){
+  socketListener: function() {
     socket.on('comment-change', function(currentComments) {
       this._comments = currentComments;
       this.trigger();
@@ -36,12 +36,12 @@ var CommentStore = Reflux.createStore({
   //ajax requests
   //TODO: DRY out this code
 
-  get: function (room_id) {
+  get: function(room_id) {
     $.ajax({
       type: 'GET',
       url: '/comments/' + room_id
     })
-    .done(function (comments) {
+    .done(function(comments) {
       this._comments = comments;
       // broadcast that _ideas has changed
       this.trigger();
@@ -51,7 +51,7 @@ var CommentStore = Reflux.createStore({
     });
   },
 
-  create: function (idea_id, name) {
+  create: function(idea_id, name) {
     var urlBoolean = false;
     if (name.toString().slice(0,7) === "http://" || name.toString().slice(0,8) === "https://"){
         urlBoolean = true;
@@ -64,7 +64,7 @@ var CommentStore = Reflux.createStore({
         urlBoolean: urlBoolean
       }
     })
-    .done(function (comment) {
+    .done(function(comment) {
       this._comments.push(comment);
       this.trigger();
       // broadcast that _comments has changed
@@ -75,7 +75,7 @@ var CommentStore = Reflux.createStore({
     });
   },
 
-  edit: function (_id, name) {
+  edit: function(_id, name) {
     $.ajax({
       type: 'PUT',
       url: '/comments/' + _id,
@@ -83,7 +83,7 @@ var CommentStore = Reflux.createStore({
         name: name
       }
     })
-    .done(function (commentEdit) {
+    .done(function(commentEdit) {
       //find matching comment and update it
       this._comments.forEach(function (comment) {
         if (comment._id === commentEdit._id) {
@@ -99,12 +99,12 @@ var CommentStore = Reflux.createStore({
     });
   },
 
-  delete: function (_id) {
+  delete: function(_id) {
     $.ajax({
       type: 'DELETE',
       url: '/comments/' + _id
     })
-    .done(function (oldComment) {
+    .done(function(oldComment) {
       //look through comments and splice out comment
       this._comments.forEach(function (comment, i) {
         if (comment._id === oldComment._id) {

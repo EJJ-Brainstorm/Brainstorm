@@ -19,26 +19,26 @@ var InterestStore = Reflux.createStore({
     this._room = currentRoom;
   },
 
-  getAll: function (idea_id) {
+  getAll: function(idea_id) {
     if (!idea_id) return this._interests;
     return _(this._interests).filter(function (interest) {
       return interest.idea === idea_id;
     });
   },
 
-  socketListener: function(){
+  socketListener: function() {
     socket.on('interest-change', function(currentInterests) {
       this._interests = currentInterests;
       this.trigger();
     }.bind(this));
   },
 
-  get: function (room_id) {
+  get: function(room_id) {
     $.ajax({
       type: 'GET',
       url: '/interest/' + room_id,
     })
-    .done(function (interests) {
+    .done(function(interests) {
       this._interests = interests;
       // broadcast that _ideas has changed
       this.trigger();
@@ -65,12 +65,12 @@ var InterestStore = Reflux.createStore({
     });
   },
 
-  delete: function (_id) {
+  delete: function(_id) {
     $.ajax({
       type: 'DELETE',
       url: '/interest/' + _id
     })
-    .done(function (oldInterest) {
+    .done(function(oldInterest) {
       //look through comments and splice out comment
       this._interests.forEach(function (interest, i) {
         if (interest._id === oldInterest._id) {

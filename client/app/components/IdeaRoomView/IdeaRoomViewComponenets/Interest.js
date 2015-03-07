@@ -16,7 +16,7 @@ var Interest = React.createClass({
 
   _liked: false,
 
-  checkLiked: function (interests) {
+  checkLiked: function(interests) {
     this._liked = false;
     var currentUser = UserStore.get();
     if (currentUser){
@@ -28,7 +28,7 @@ var Interest = React.createClass({
     }
   },
 
-  getInitialState: function () {
+  getInitialState: function() {
     var interests = InterestStore.getAll(this.props.idea_id);
     this.checkLiked(interests);
     return {
@@ -36,7 +36,7 @@ var Interest = React.createClass({
     };
   },
 
-  handleClick: function (e) {
+  handleClick: function(e) {
     e.preventDefault();
     if (this._liked){
       InterestActions.delete(this._liked);
@@ -45,7 +45,7 @@ var Interest = React.createClass({
     }
   },
 
-  componentDidMount: function () {
+  componentDidMount: function() {
     this.listenTo(InterestStore, this.onStoreChange);
   },
 
@@ -57,7 +57,7 @@ var Interest = React.createClass({
     }
   },
 
-  render: function () {
+  render: function() {
     var interestCount = this.state.interests.length;
     return (
       <div className="likes" ref="body" style={{display:"inline"}}>

@@ -149,14 +149,14 @@ var Room = React.createClass({
   },
 
 
-  _onChange: function(){
+  _onChange: function() {
     if(this.isMounted()) {
       this.setState({editing: false});
     }
   },
 
 
-  show: function () {
+  show: function() {
     if (this.isMounted()) {
       this.setState({ displaying: !this.state.displaying });
     }

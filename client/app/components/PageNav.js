@@ -16,17 +16,17 @@ var PageNav = React.createClass({
     };
   },
 
-  onStoreChange: function(){
+  onStoreChange: function() {
     if(this.isMounted()) {
       this.setState({ currentUser: UserStore.get() });
     }
   },
 
-  componentDidMount: function(){
+  componentDidMount: function() {
     this.listenTo(UserStore, this.onStoreChange)
   },
 
-  handleWelcome:function(){
+  handleWelcome: function() {
     //dispatch a navigate to welcome on click
     if (this.state.currentUser){
       this.transitionTo('/rooms');
@@ -35,7 +35,7 @@ var PageNav = React.createClass({
     }
   },
 
-  render:function(){
+  render: function() {
     return (
       <div>
         <header>
@@ -46,10 +46,10 @@ var PageNav = React.createClass({
               </ul>
               <ul id="nav-mobile" className="left hide-on-med-and-down">
                 <li>
-                  <div className="brainstormer" style={{paddingLeft:"15px", paddingRight:"15px"}} onClick={this.handleWelcome}>Brainstormer</div>
+                  <div className="brainstormer" style={{padding: "0rem 1.25rem"}} onClick={this.handleWelcome}>Brainstormer</div>
                 </li>
                 <li>
-                  <Link to="about" style={{paddingLeft:"15px", paddingRight:"15px"}}>
+                  <Link to="about" style={{padding: "0rem 1.25rem"}}>
                     Getting Started
                   </Link>
                 </li>

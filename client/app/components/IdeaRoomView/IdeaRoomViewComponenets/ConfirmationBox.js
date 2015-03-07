@@ -16,7 +16,7 @@ var ConfirmationBox = React.createClass({
     }
   },
 
-  render: function () {
+  render: function() {
     return (
       <div id="modal1" className="modal">
         <div className="modal-content">
